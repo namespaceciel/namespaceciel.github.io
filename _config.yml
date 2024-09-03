@@ -1,9 +1,9 @@
 # Site settings
-title: Ciel
+title: Ciel's Paperplane
 SEOTitle: Ciel's Paperplane
-description: C++ Blog By a C++ Enthusiast
-keyword: "ciel, cpp"
-url: "https://namespaceciel.github.io"              # your host, for absolute URL
+description: a C++ blog by a C++ Enthusiast
+keyword: "cpp"
+url: "https://namespaceciel.github.io"      # your host, for absolute URL
 baseurl: ""                                         # for example, '/blog' if your blog hosted on 'host/blog'
 avatar: "img/avatar.png"                            # the avatar showing on the homepage
 
@@ -53,7 +53,7 @@ collections:
 
 # SNS settings
 sns:
-  RSS: true
+  RSS: false
   github_username: namespaceciel
   weibo_username:
   zhihu_username:
@@ -103,15 +103,9 @@ menus:
   - title: Home
     font: fab fa-fort-awesome
     url: /
-  - title: About
+  - title: About Me
     font: fas fa-paw
-    submenus:
-      - title: Me
-        font: fas fa-user-astronaut
-        url: /about/
-      - title: Theme
-        font: fas fa-meteor
-        url: /theme/
+    url: /about/
   - title: Archive
     font: fas fa-archive
     url: /archive/
@@ -122,10 +116,10 @@ menus:
 
 # Comment settings
 comment:
-  provider: gitalk # false (default), "disqus", "gitalk", "valine"
+  provider: false # false (default), "disqus", "gitalk", "valine"
 
   # Disqus settings
-  disqus_username: renovamen
+  disqus_username: Ciel
 
   # Gitalk settings
   # https://github.com/gitalk/gitalk
@@ -135,8 +129,7 @@ comment:
     repo: gitalk-comments
     owner: This-is-an-Apple
     admin:
-      - Renovamen
-      - This-is-an-Apple
+      - Ciel
 
   # Valine settings
   # https://valine.js.org/

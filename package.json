@@ -3,14 +3,14 @@
   "title": "Jekyll Theme Gungnir",
   "description": "The Jekyll version of the blog theme Gungnir.",
   "version": "0.0.1",
-  "author": "Renovamen <renovamenzxh@gmail.com>",
+  "author": "Ciel <Cielzxh@gmail.com>",
   "license": "MIT",
   "homepage": "https://jekyll-theme-gungnir.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Renovamen/jekyll-theme-gungnir"
+    "url": "https://github.com/Ciel/jekyll-theme-gungnir"
   },
-  "bugs": "https://github.com/Renovamen/jekyll-theme-gungnir/issues",
+  "bugs": "https://github.com/Ciel/jekyll-theme-gungnir/issues",
   "devDependencies": {
     "grunt": "^1.0.4",
     "grunt-banner": "~0.6.0",

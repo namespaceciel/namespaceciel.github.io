@@ -1,7 +1,7 @@
 
 # Ducumentation
 
-Github: [<i class="fas fa-link"></i> Renovamen/jekyll-theme-gungnir](https://github.com/Renovamen/jekyll-theme-gungnir){:target="_blank"}
+Github: [<i class="fas fa-link"></i> Ciel/jekyll-theme-gungnir](https://github.com/Ciel/jekyll-theme-gungnir){:target="_blank"}
 
 Derived from [Huxpro/huxpro.github.io](https://github.com/Huxpro/huxpro.github.io){:target="_blank"}. Some of the designs and code are borrowed from other themes, including but not limited to [mashirozx/Sakura](https://github.com/mashirozx/Sakura/){:target="_blank"}, [kitian616/jekyll-TeXt-theme](https://github.com/kitian616/jekyll-TeXt-theme){:target="_blank"}, [Fechin/hexo-theme-diaspora](https://github.com/Fechin/hexo-theme-diaspora){:target="_blank"}, [liuzc/LeaveIt](https://github.com/liuzc/LeaveIt){:target="_blank"}, et al.
 
@@ -15,7 +15,7 @@ Derived from [Huxpro/huxpro.github.io](https://github.com/Huxpro/huxpro.github.i
 Clone the project from Github:
 
 ```bash
-git clone https://github.com/Renovamen/jekyll-theme-gungnir.git
+git clone https://github.com/Ciel/jekyll-theme-gungnir.git
 cd jekyll-theme-gungnir
 ```
 
@@ -52,12 +52,12 @@ All the following options should be configured in `_config.yml`.
 
 ### Site Settings
 ```yaml
-title: Renovamen # title of your site
-SEOTitle: Renovamen's blog # SEO title of your site
+title: Ciel # title of your site
+SEOTitle: Ciel's blog # SEO title of your site
 description: Hmm, interesting blog. # description of your site
 keyword: "blog, personal website" # keywords of your site
-url: "https://renovamen.ink" # URL of your site
-baseurl: "" # Base URL of your site. If you site is hosted on 'https://renovamen.ink/blog', it should be '/blog'
+url: "https://Ciel.ink" # URL of your site
+baseurl: "" # Base URL of your site. If you site is hosted on 'https://Ciel.ink/blog', it should be '/blog'
 avatar: "img/header-avatar.jpeg" # path of the avatar showing on home page
 ```
 
@@ -101,7 +101,7 @@ The default highlighting theme is `dark`, you can also switch it to `light`:
 highlight: # "dark" (default), "light"
 ```
 
-Highlighting stylesheets could be found [here](https://github.com/Renovamen/jekyll-theme-gungnir/tree/master/_sass/highlight){:target="_blank"}. You can also modify them to create your own theme, or just import the [stylesheets](https://github.com/highlightjs/highlight.js/tree/master/src/styles){:target="_blank"} provided by Highlight.js.
+Highlighting stylesheets could be found [here](https://github.com/Ciel/jekyll-theme-gungnir/tree/master/_sass/highlight){:target="_blank"}. You can also modify them to create your own theme, or just import the [stylesheets](https://github.com/highlightjs/highlight.js/tree/master/src/styles){:target="_blank"} provided by Highlight.js.
 
 
 #### Alert
@@ -320,12 +320,12 @@ The *mask* is the translucent overlay placed on the cover image. It will be help
 
 ### About
 
-Just refer to the [About page](/about){:target="_blank"} and its [Front-matter](https://github.com/Renovamen/jekyll-theme-gungnir/blob/master/about.html){:target="_blank"} of this site.
+Just refer to the [About page](/about){:target="_blank"} and its [Front-matter](https://github.com/Ciel/jekyll-theme-gungnir/blob/master/about.html){:target="_blank"} of this site.
 
 
 ### Links
 
-Just refer to the [Links page](/links){:target="_blank"} and its [Front-matter](https://github.com/Renovamen/jekyll-theme-gungnir/blob/master/links.html){:target="_blank"} of this site. (Repeat *1)
+Just refer to the [Links page](/links){:target="_blank"} and its [Front-matter](https://github.com/Ciel/jekyll-theme-gungnir/blob/master/links.html){:target="_blank"} of this site. (Repeat *1)
 
 If any of the links' avatar is not specified, `img/links/default.jpg` will be shown as the default avatar.
 

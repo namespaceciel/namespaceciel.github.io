@@ -54,7 +54,7 @@ Inherit from the original theme:
 ## Quick start
 
 ```bash
-git clone https://github.com/Renovamen/jekyll-theme-gungnir.git
+git clone https://github.com/Ciel/jekyll-theme-gungnir.git
 cd jekyll-theme-gungnir
 
 # install denpendencies
