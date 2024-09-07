@@ -40,15 +40,15 @@ cdn:
 
 
 # Publish posts or collection documents with a future date.
-future: true
+future: false
 
 collections:
   experiences:
-    output: true
+    output: false
   publications:
-    output: true
+    output: false
   projects:
-    output: true
+    output: false
 
 
 # SNS settings

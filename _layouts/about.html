@@ -22,11 +22,4 @@ layout: default
   {% if site.projects.size > 0 %}
     {% include about/projects.html %}
   {% endif %}
-
-  <div class="section">
-    <div class="post-container">
-      {% capture about_other %}{% include about/md/other.md %}{% endcapture %}
-      {{ about_other | markdownify }}
-    </div>
-  </div>
 </div>

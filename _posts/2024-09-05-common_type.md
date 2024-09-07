@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C++ 模板元编程入门实战之 std::common_type 的实现
+title: C++ 模板元编程入门之 std::common_type 的实现
 header-img: img/20240905.png
 header-style: text
 catalog: true
