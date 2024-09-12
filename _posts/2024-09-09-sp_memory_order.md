@@ -99,10 +99,10 @@ std::weak_ptr 的 `weak_count_release()` 实现同理。
 假设我们的 std::shared_ptr 的管理对象为 std::unique_ptr\<int>，我们知道它的析构会是把内部的指针 delete。
 
 ```cpp
-std::shared_ptr<std::unique_ptr<int>> sp{new std::unique_ptr<int>{1}}; // 初始构造了一个 up 值为 1，sp 被两个线程持有
+std::shared_ptr<std::unique_ptr<int>> sp{new std::unique_ptr<int>{new int{1}}}; // 初始构造了一个 up 值为 1，sp 被两个线程持有
 
 // 某个线程做了这样的事
-sp.get().reset(new int{2}); // reset 会删除之前管理的 up，并且塞入一个新的 up 值为 2
+sp.get()->reset(new int{2}); // reset 会删除之前管理的 up，并且塞入一个新的 up 值为 2
 
 // 两个线程都调用了 shared_count_release()
 if (shared_count_.fetch_sub(1, std::memory_order_release) == 1) {
