@@ -9,7 +9,7 @@ tags:
   - memory_order
 ---
 
-![village2](/img/villlage2.JPG)
+![图片](/img/villlage2.JPG)
 
 本文前置知识见 [[C++] 一点点 std::shared_ptr 的实现细节](https://www.bilibili.com/video/BV1wx421X72W)
 {:.info}

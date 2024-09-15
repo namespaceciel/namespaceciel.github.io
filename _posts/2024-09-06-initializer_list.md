@@ -9,7 +9,7 @@ tags:
   - 模板元编程
 ---
 
-![flower](/img/fruit.png)
+![图片](/img/fruit.png)
 
 本文前置知识见 [C++ SFINAE 简单介绍与两个常用用法](https://namespaceciel.github.io/2024/09/04/SFINAE/)
 {:.info}

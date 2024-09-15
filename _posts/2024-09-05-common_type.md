@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C++ 模板元编程入门之 std::common_type 的实现
-header-img: img/20240905.png
+header-img: img/flower.png
 header-style: text
 catalog: true
 tags:
@@ -9,7 +9,7 @@ tags:
   - 模板元编程
 ---
 
-![flower](/img/20240905.png)
+![图片](/img/flower.png)
 
 本文前置知识见 [C++ SFINAE 简单介绍与两个常用用法](https://namespaceciel.github.io/2024/09/04/SFINAE/)
 {:.info}
