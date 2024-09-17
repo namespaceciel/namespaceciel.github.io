@@ -164,7 +164,7 @@ t = mp;
 // FIXME: Current implementation returns true for const&& constructor and assignment.
 template<class T>
 struct worth_move {
-    static_assert(!std::is_const<T>::value, "");
+    static_assert(!std::is_const<T>::value);
 
 private:
     using U = typename std::decay<T>::type;
