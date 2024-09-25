@@ -1,7 +1,7 @@
 # Site settings
 title: Ciel
 SEOTitle: Ciel's Paperplane
-description: 庭有枇杷树，吾妻死之年所手植也，今已亭亭如盖矣。
+description: 
 keyword: "cpp"
 url: "https://namespaceciel.github.io"      # your host, for absolute URL
 baseurl: ""                                         # for example, '/blog' if your blog hosted on 'host/blog'
