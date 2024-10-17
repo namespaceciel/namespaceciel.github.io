@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C++ 为什么各大标准库的 std::vector\<T>::iterator 不直接用 T*？
+title: C++ 为什么各大标准库的 std::vector::iterator 不直接用 T*？
 header-img: img/cat.png
 header-style: text
 catalog: true
