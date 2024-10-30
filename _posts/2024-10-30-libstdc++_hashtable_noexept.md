@@ -14,7 +14,7 @@ tags:
 
 ## 0. 标准库 unordered 容器简介
 
-标准库的四个容器：`std::unordered_set`、`std::unordered_map`、`std::unordered_multiset` 和 `std::unordered_multimap` 的底层都是同一个东西：哈希表。它具体类似一个领接链表：一个链表数组，我们对类型 T 的对象哈希之后，将哈希值对着数组长度取模，就得到了它应该存放的“桶”，然后作为一个链表结点挂在那个桶上。
+标准库的四个容器：`std::unordered_set`、`std::unordered_map`、`std::unordered_multiset` 和 `std::unordered_multimap` 的底层都是同一个东西：哈希表。它具体类似一个邻接链表：一个链表数组，我们对类型 T 的对象哈希之后，将哈希值对着数组长度取模，就得到了它应该存放的“桶”，然后作为一个链表结点挂在那个桶上。
 
 正式来说，同一个桶上的结点的哈希值对数组长度取模一定相等，而它们的哈希值并不一定相同；如果它们的哈希值相同，也并不一定代表它们的值相同（根据 `operator==` 确定）。不过这个关系反向都成立。
 
@@ -57,4 +57,4 @@ libstdc++ 这种行为在我看来就是天才与逆天并存，因为 noexcept 
 
 Bitcoin Core 是现实中确实被这个逆天设定坑过的项目。它有一个巨大的 Bitcoin 类型哈希表，这个类型的哈希值计算非常简单，但是由于他们没有为哈希函数标记 noexcept，导致超大数量的 Bitcoin 结点每个都浪费了 8 字节内存。
 
-之后他们在这个 [commit](https://github.com/bitcoin/bitcoin/commit/67d99900b0d770038c9c5708553143137b124a6c) 中，通过标记了 noexcept，使性能损失了 1.6%，但是省下了 9% 的内存开销，这使得内存布局更加紧凑，数据库缓存更加友好，对于他们这个系统而言是非常有利的。
+之后他们在这个 [commit](https://github.com/bitcoin/bitcoin/commit/67d99900b0d770038c9c5708553143137b124a6c) 中，通过标记了 noexcept，使性能损失了 1.6%，但是省下了 9.4% 的内存开销，这使得内存布局更加紧凑，数据库缓存更加友好，对于他们这个系统而言是非常有利的。
