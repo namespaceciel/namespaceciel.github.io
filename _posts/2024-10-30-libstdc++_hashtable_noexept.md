@@ -12,7 +12,7 @@ tags:
 
 ![图片](/img/village3.JPG)
 
-本文参考自 Arthur O'Dwyer 的博客：https://quuxplusone.github.io/blog/2024/08/16/libstdcxx-noexcept-hash/
+本文参考自 Arthur O'Dwyer 的博客：[https://quuxplusone.github.io/blog/2024/08/16/libstdcxx-noexcept-hash/](https://quuxplusone.github.io/blog/2024/08/16/libstdcxx-noexcept-hash/)
 {:.info}
 
 ## 0. 标准库 unordered 容器简介

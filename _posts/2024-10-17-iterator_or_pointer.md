@@ -10,7 +10,7 @@ tags:
 
 ![图片](/img/cat.png)
 
-本文参考自 Arthur O'Dwyer 的博客：https://quuxplusone.github.io/blog/2022/03/03/why-isnt-vector-iterator-just-t-star/
+本文参考自 Arthur O'Dwyer 的博客：[https://quuxplusone.github.io/blog/2022/03/03/why-isnt-vector-iterator-just-t-star/](https://quuxplusone.github.io/blog/2022/03/03/why-isnt-vector-iterator-just-t-star/)
 {:.info}
 
 ## 0. 现状
