@@ -10,6 +10,9 @@ tags:
 
 ![图片](/img/cat.png)
 
+本文参考自 Arthur O'Dwyer 的博客：https://quuxplusone.github.io/blog/2022/03/03/why-isnt-vector-iterator-just-t-star/
+{:.info}
+
 ## 0. 现状
 
 C++ 的很多容器，例如 `std::vector`、`std::string`、`std::span`、`std::string_view` 等，它们的迭代器都可以直接用 `T*`，但是这些标准库基本都有自己的包装迭代器，详见下表：
@@ -25,7 +28,7 @@ C++ 的很多容器，例如 `std::vector`、`std::string`、`std::span`、`std:
 
 这些包装类基本都是存一个指针在内部，然后重载各种运算符，使得其表现的跟裸指针基本一致。
 
-在 debug 模式下，也可以多存 begin 和 end 指针等，使得其在各种操作前都可以检查有没有越界等。
+在 debug 模式下，也可以多存 `begin` 和 `end` 指针等，使得其在各种操作前都可以检查有没有越界等。
 
 这些对指针的包装行为会让程序不可避免地变得笨重。如果没有特别需求的话，自己实现的容器用指针确实就可以了。但是它们确实有其存在的很多作用。
 
@@ -150,13 +153,13 @@ int main() {
 
 我们假设了三个场景：迭代器分别为 `T*`、`std::Iter<T*>` 和 `typename std::Iter<T*>::type`。
 
-在 algorithm 头文件中有一个 `std::iter_swap` 函数，A 为三种迭代器类型也都自定义了 `iter_swap` 函数。
+在 algorithm 头文件中有一个 `std::iter_swap` 函数，`A` 为三种迭代器类型也都自定义了 `iter_swap` 函数。
 
-对于 `T*` 而言，它不是 `std` 空间成员，所以根本不会去找 `std::iter_swap`，只有一个 A 的版本能用。
+对于 `T*` 而言，它不是 `std` 空间成员，所以根本不会去找 `std::iter_swap`，只有一个 `A` 的版本能用。
 
-对于 `std::Iter<T*>` 而言，它既能找到 `std::iter_swap` 也能找到 A 的版本。但是 A 版本更特殊，最后选择了 A 版本。
+对于 `std::Iter<T*>` 而言，它既能找到 `std::iter_swap` 也能找到 `A` 的版本。但是 `A` 版本更特殊，最后选择了 `A` 版本。
 
-对于 `typename std::Iter<T*>::type` 而言，它已经看不到 A 了！只能选择 `std::iter_swap`。
+对于 `typename std::Iter<T*>::type` 而言，它已经看不到 `A` 了！只能选择 `std::iter_swap`。
 
 ## 5. 内建类型的前置递增等操作只接受左值
 

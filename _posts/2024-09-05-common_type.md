@@ -14,16 +14,16 @@ tags:
 本文前置知识见 [C++ SFINAE 简单介绍与两个常用用法](https://namespaceciel.github.io/2024/09/04/SFINAE/)
 {:.info}
 
-std::common_type 意为取得多个类型的公共类型（即可以容得下原类型们的值的类型）。
+`std::common_type` 意为取得多个类型的公共类型（即可以容得下原类型们的值的类型）。
 
-比如 int 与 long long 的公共类型为 long long，而 double 和 long long 的公共类型则为 double。
+比如 `int` 与 `long long` 的公共类型为 `long long`，而 `double` 和 `long long` 的公共类型则为 `double`。
 
 ```cpp
 static_assert(std::is_same_v<std::common_type_t<int, long long>, long long>);
 static_assert(std::is_same_v<std::common_type_t<double, long long>, double>);
 ```
 
-它在标准库一些函数，例如 C++17 的 std::gcd 中有重要作用：
+它在标准库一些函数，例如 C++17 的 `std::gcd` 中有重要作用：
 
 ```cpp
 template<class M, class N>
@@ -40,18 +40,18 @@ constexpr std::common_type_t<M, N> gcd(M m, N n);
 condition ? res1 : res2
 ```
 
-的结果类型是 res1 和 res2 的公共类型，且是编译期确定，与这里的 condition 求值结果无关。
+的结果类型是 `res1` 和 `res2` 的公共类型，且是编译期确定，与这里的 `condition` 求值结果无关。
 
 三元运算符具体知识见 [其他运算符 - cppreference.com](https://zh.cppreference.com/w/cpp/language/operator_other) 条件运算符 小节。
 
-所以 common_type 的雏形只需要如下实现：
+所以 `common_type` 的雏形只需要如下实现：
 
 ```cpp
 template<class T1, class T2>
 using common_type_t = decltype(true ? std::declval<T1>() : std::declval<T2>());
 ```
 
-这里的 std::declval\<T>() 拿到一个类型的右值引用，使得在 decltype 说明符的操作数中不必经过构造函数就能使用成员函数，只能用于不求值语境。
+这里的 `std::declval<T>()` 拿到一个类型的右值引用，使得在 `decltype` 说明符的操作数中不必经过构造函数就能使用成员函数，只能用于不求值语境。
 
 ## 2. std::common_type 具体实现介绍
 
@@ -69,13 +69,13 @@ using common_type_t = decltype(true ? std::declval<T1>() : std::declval<T2>());
 4. 如果 sizeof...(T) 大于二（即 T... 由类型 T1, T2, R... 组成），那么 std::common_type<T1, T2>::type 存在时成员 type 指代 std::common_type<std::common_type<T1, T2>::type, R...>::type（如果存在这种类型）。其他所有情况下，没有成员 type。
 ```
 
-std::common_type 具体规则则稍微复杂一点，原因是要给予程序员更多的自定义空间，比如在使用三元运算符之前会先查看是否有用户定义了特化，优先使用特化。
+`std::common_type` 具体规则则稍微复杂一点，原因是要给予程序员更多的自定义空间，比如在使用三元运算符之前会先查看是否有用户定义了特化，优先使用特化。
 
-sizeof...(T) == 1 时还要用 std::common_type\<T0, T0> 走一遍主流程也是为了这个。
+`sizeof...(T) == 1` 时还要用 `std::common_type<T0, T0>` 走一遍主流程也是为了这个。
 
 ## 3. 一个分类小技巧
 
-可以看到具体定义中出现了“如果满足 A 条件，则用 a，否则如果满足 B 条件，则用 b，否则 ...”的规则，对于这种的实现如果用 n 层 std::conditional 会显得非常丑陋，这里介绍一种非常优雅的写法：
+可以看到具体定义中出现了“如果满足 A 条件，则用 a，否则如果满足 B 条件，则用 b，否则 ...”的规则，对于这种的实现如果用 n 层 `std::conditional` 会显得非常丑陋，这里介绍一种非常优雅的写法：
 
 ```cpp
 // 主模板，作为 SFINAE 的 backup
@@ -110,116 +110,16 @@ template<class T1, class T2>
 struct common_type_helper<T1, T2> : common_type_sub_bullet1<T1 ,T2> {};
 ```
 
-主模板继承顺序为 common_type_helper 继承 bullet1 继承 bullet2 ...
+主模板继承顺序为 `common_type_helper` 继承 `bullet1` 继承 `bullet2`...
 
-这里的偏特化用 typename std::enable_if\<Condition>::type 尝试取得 Condition 为真时才有的 type void，满足主模板的第三参数 class = void。
+这里的偏特化用 `typename std::enable_if<Condition>::type` 尝试取得 `Condition` 为真时才有的 `type` `void`，满足主模板的第三参数 `class = void`。
 
-所以 Condition 成立时就有了 type，不成立时就回退到主模板，没有 type。
+所以 `Condition` 成立时就有了 `type`，不成立时就回退到主模板，没有 `type`。
 
-所以如果 A 条件满足，那么 bullet1 类内已经有 type 了，且它偏特化模板不继承 bullet2，直接结束。
+所以如果 `A` 条件满足，那么 `bullet1` 类内已经有 `type` 了，且它偏特化模板不继承 `bullet2`，直接结束。
 
-而如果 A 条件不满足，那么 bullet1 则是一个空类，继承了 bullet2。重复这个流程直到找到首个满足条件的 bullet，拿到它的 type。
+而如果 `A` 条件不满足，那么 `bullet1` 则是一个空类，继承了 `bullet2`。重复这个流程直到找到首个满足条件的 `bullet`，拿到它的 `type`。
 
-当然这里就算偏特化模板里像主模板一样定义了继承关系，也没有任何影响，因为如果一个类重复继承同一个 type，那么 type 会依次被覆盖，最后存留的只会是最下层的 type。
+当然这里就算偏特化模板里像主模板一样定义了继承关系，也没有任何影响，因为如果一个类重复继承同一个 `type`，那么 `type` 会依次被覆盖，最后存留的只会是最下层的 `type`。
 
-所以如果 A 条件满足，那么 bullet1 类内已经有 type 了，那它就算继承的上层 type 还存在多个，都会被自己的 type 覆盖，不需要管。
-
-## 4. 完整实现 介绍略（一年前刚学 C++ 时写的，有点烂）
-
-```cpp
-template<class... T>
-struct common_type;
-
-namespace details {
-
-template<class T1, class T2>
-using common_type_alias = decltype(true ? declval<T1>() : declval<T2>());
-
-template<class...>
-struct common_type_helper {};
-
-template<>
-struct common_type_helper<> {};
-
-template<class T>
-struct common_type_helper<T> : common_type<T, T> {};
-
-// if struct has type, the inherited type will be shadowed
-template<class T1, class T2> struct common_type_sub_bullet4 {};
-template<class T1, class T2> struct common_type_sub_bullet3 : common_type_sub_bullet4<T1, T2> {};
-template<class T1, class T2> struct common_type_sub_bullet2 : common_type_sub_bullet3<T1, T2> {};
-template<class T1, class T2> struct common_type_sub_bullet1 : common_type_sub_bullet2<T1, T2> {};
-
-template<class T1, class T2>
-    requires (!is_same_v<T1, decay_t<T1>> || !is_same_v<T2, decay_t<T2>>) &&
-        requires { typename common_type<decay_t<T1>, decay_t<T2>>::type; }
-struct common_type_sub_bullet1<T1, T2> {
-    using type = typename common_type<decay_t<T1>, decay_t<T2>>::type;
-};
-
-template<class T1, class T2>
-    requires requires { typename common_type<T1, T2>::type; }
-struct common_type_sub_bullet2<T1, T2> {
-    using type = typename common_type<T1, T2>::type;
-};
-
-template<class T1, class T2>
-    requires requires { typename decay_t<common_type_alias<T1, T2>>; }
-struct common_type_sub_bullet3<T1, T2> {
-    using type = decay_t<common_type_alias<T1, T2>>;
-};
-
-template<class T1, class T2>
-    requires requires { typename decay_t<common_type_alias<const remove_reference_t<T1>&,
-            const remove_reference_t<T2>&>>; }
-struct common_type_sub_bullet4<T1, T2> {
-    using type = decay_t<common_type_alias<const remove_reference_t<T1>&, const remove_reference_t<T2>&>>;
-};
-
-template<class T1, class T2>
-struct common_type_helper<T1, T2> : common_type_sub_bullet1<T1 ,T2> {};
-
-template<class T1, class T2, class... Rest>
-struct common_type_helper<T1, T2, Rest...>
-    : common_type_helper<typename common_type_helper<T1, T2>::type, Rest...> {};
-
-}   // namespace details
-
-template<class... T>
-struct common_type : details::common_type_helper<T...> {};
-
-template<class... T>
-using common_type_t = typename common_type<T...>::type;
-```
-
-## 笔者踩过的一个小坑 介绍略
-
-Line 16: Why straightly deriving from common_type_helper\<T, T> will get compile error when common_type\<T, T> is literally derived from common_type_helper\<T, T>?
-
-e.g. common_type_t\<int>
-
-When deriving from common_type\<T, T>, the instantiating order is:
-
-===============================================
-
-common_type\<int>
-
-common_type_helper\<int>
-
-*common_type\<int, int>
-
-common_type_helper\<int, int>
-
-common_type_sub_bullet1\<int, int>
-
-common_type_sub_bullet2\<int, int>   // Line 32 checks if common_type\<int, int> has type.
-
-common_type_sub_bullet3\<int, int>
-
-common_type_sub_bullet4\<int, int>
-
-===============================================
-
-So at Line 32 common_type\<int, int> is already existed and doesn't have type.
-
-But when straightly deriving from common_type_helper\<T, T>, common_type\<int, int> is never instantiated instead, at this time, line 32 just begins to instantiate, and it will derive from common_type_helper\<int, int>, which is an incomplete type, so it yields an error.
+所以如果 `A` 条件满足，那么 `bullet1` 类内已经有 `type` 了，那它就算继承的上层 `type` 还存在多个，都会被自己的 `type` 覆盖，不需要管。
