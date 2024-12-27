@@ -166,7 +166,7 @@ bool increment_if_not_zero(std::memory_order order = std::memory_order_seq_cst) 
 
 ```cpp
 size_t load(std::memory_order order = std::memory_order_seq_cst) const noexcept {
-	size_t val = impl_.load(order);
+	size_t val = count_.load(order);
 	if (val & zero_flag) {
 		return 0;
 	}
@@ -180,7 +180,7 @@ size_t load(std::memory_order order = std::memory_order_seq_cst) const noexcept 
 
 ```cpp
 size_t load(std::memory_order order = std::memory_order_seq_cst) const noexcept {
-	size_t val = impl_.load(order);
+	size_t val = count_.load(order);
 	if (val == 0 && count_.compare_exchange_strong(val, zero_flag, order, std::memory_order_relaxed)) {
 		return 0;
 	}
@@ -194,7 +194,7 @@ size_t load(std::memory_order order = std::memory_order_seq_cst) const noexcept 
 static constexpr size_t help_flag = static_cast<size_t>(1) << (std::numeric_limits<size_t>::digits - 2);
 
 size_t load(std::memory_order order = std::memory_order_seq_cst) const noexcept {
-	size_t val = impl_.load(order);
+	size_t val = count_.load(order);
 	if (val == 0 && count_.compare_exchange_strong(val, zero_flag | help_flag, order, std::memory_order_relaxed)) {
 		return 0;
 	}
@@ -246,7 +246,7 @@ public:
 	}
 
 	size_t load(std::memory_order order = std::memory_order_seq_cst) const noexcept {
-		size_t val = impl_.load(order);
+		size_t val = count_.load(order);
 		if (val == 0 && count_.compare_exchange_strong(val, zero_flag | help_flag, order, std::memory_order_relaxed)) {
 			return 0;
 		}
