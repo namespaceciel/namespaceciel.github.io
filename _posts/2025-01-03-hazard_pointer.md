@@ -166,7 +166,7 @@ class hazard_slot_headquarter {
     ~hazard_slot_headquarter() {
         hazard_slot* cur = hazard_slot_list_head;
         while (cur) {
-            hazard_slot* old = ciel::exchange(cur, cur->next.load(std::memory_order_relaxed));
+            hazard_slot* old = std::exchange(cur, cur->next.load(std::memory_order_relaxed));
             delete old;
         }
     }
