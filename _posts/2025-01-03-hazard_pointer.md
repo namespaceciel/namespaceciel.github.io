@@ -246,7 +246,7 @@ T* protect(const std::atomic<T*>& src) noexcept {
 
 之前说到被风险保护的类需要继承自 `std::hazard_pointer_obj_base`，那只要我们在基类中加入链表结点，待回收对象们就可以轻松被串在一起。之后当它们累计到一定数量后，我们扫描一遍链表，同时我们也可以通过访问 `hazard_slot_headquarter` 的 slot 链表来得知所有正在被保护的指针。这样我们就可以清理掉不被保护的结点们。
 
-需要注意的是对每个 `protected_ptr` 的访问都需要使用 `std::memory_order_acquire`，与 `protect` 过程中的 `std::memory_order_acquire` 形成释放-获取定序。
+需要注意的是对每个 `protected_ptr` 的访问都需要使用 `std::memory_order_acquire`，与 `protect` 过程中的 `std::memory_order_release` 形成释放-获取定序。
 
 ```cpp
 hazard_slot* cur = hazard_slot_headquarter::get().hazard_slot_list_head;
